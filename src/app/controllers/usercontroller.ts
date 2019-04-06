@@ -8,7 +8,7 @@ export class UserController {
 
   static login(req: Request, res: Response, next: NextFunction) {
     const private_key = process.env.PRIVATEKEY || '';
-    User.findOne({ email: req.body.email }, (err: Errback, result: any) {
+    User.findOne({ email: req.body.email }, (err: Errback, result: any) => {
       if (err) {
         res.status(500).json({ status: 'failed', message: err })
       } else {
