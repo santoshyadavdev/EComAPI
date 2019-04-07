@@ -15,7 +15,7 @@ export class UserController {
         if (result != undefined) {
           if (compareSync(req.body.password, result.password)) {
             const token = sign({ id: result._id }, private_key, { expiresIn: '1h' });
-            res.json({ status: 'success', message: 'Login Success!', data: token })
+            res.json({ status: 'success', message: 'Login Success!', data: token, role: result.role })
           } else {
             res.json({ status: 'failed', message: 'UserName or Password is incorrect!' })
           }
