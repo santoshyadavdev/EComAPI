@@ -1,8 +1,13 @@
 import * as express from "express";
-import { userRoute, categoryRoute, productRoute, errorLogRoute } from "./routes/index";
+import {
+  userRoute, categoryRoute,
+  productRoute, errorLogRoute,
+  wishlistRoute
+} from "./routes/index";
 import * as bodyParser from "body-parser";
 import * as dotenv from "dotenv";
 import { MongoConnect } from "./db/db";
+import { validateUser } from "./middleware/auth";
 
 
 dotenv.load();
@@ -10,7 +15,7 @@ var app = express();
 
 // app.get("/", (req, res) => res.send("This is get express API"));
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-access-token");
   next();
@@ -26,6 +31,7 @@ app.use("/user", userRoute);
 app.use("/category", categoryRoute);
 app.use("/product", productRoute);
 app.use("/errorLog", errorLogRoute);
+app.use("/wishlist", validateUser, wishlistRoute);
 
 app.listen(3000, () => {
   MongoConnect.connect().then(res => console.log("DB connected"));

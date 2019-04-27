@@ -16,7 +16,6 @@ export class ErrorLogController {
 
     static saveError(req: Request, res: Response, next: NextFunction) {
         const error = new Error(req.body);
-        console.log(error)
         Error.create(error, (err: Errback, result: any) => {
             if (err) {
                 res.status(500).json({ status: 'failed', message: err })
