@@ -1,11 +1,15 @@
 import { Request, Response, NextFunction, Errback } from "express";
 import { WishList } from '../models/WishList';
+import { Types } from 'mongoose';
 
 
 export class WishListController {
 
     static getWishList(req: Request, res: Response, next: NextFunction) {
         WishList.aggregate([
+            {
+                $match: { userId: new Types.ObjectId(req.body.userId), status: 'A' }
+            },
             {
                 $lookup: {
                     from: 'products',

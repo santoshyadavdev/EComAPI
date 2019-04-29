@@ -1,11 +1,14 @@
 import { Request, Response, NextFunction, Errback } from "express";
 import { Cart } from '../models/Cart';
+import { Types } from 'mongoose';
 
+export class CartController {
 
-export class WishListController {
-
-    static getWishList(req: Request, res: Response, next: NextFunction) {
+    static getUserCart(req: Request, res: Response, next: NextFunction) {
         Cart.aggregate([
+            {
+                $match: { userId: new Types.ObjectId(req.body.userId) , status: 'A' }
+            },
             {
                 $lookup: {
                     from: 'products',
@@ -23,7 +26,7 @@ export class WishListController {
         })
     }
 
-    static saveWishList(req: Request, res: Response, next: NextFunction) {
+    static saveToCart(req: Request, res: Response, next: NextFunction) {
         const wishlist = new Cart(req.body);
         Cart.create(wishlist, (err: Errback, result: any) => {
             if (err) {
