@@ -2,7 +2,8 @@ import * as express from "express";
 import {
   userRoute, categoryRoute,
   productRoute, errorLogRoute,
-  wishlistRoute, cartRoute
+  wishlistRoute, cartRoute,
+  orderRoute
 } from "./routes/index";
 import * as bodyParser from "body-parser";
 import * as dotenv from "dotenv";
@@ -33,6 +34,7 @@ app.use("/product", productRoute);
 app.use("/errorLog", errorLogRoute);
 app.use("/wishlist", wishlistRoute);
 app.use("/cart", cartRoute);
+app.use("/order", orderRoute);
 
 app.listen(3000, () => {
   MongoConnect.connect().then(res => console.log("DB connected"));
