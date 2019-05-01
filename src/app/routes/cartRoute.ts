@@ -7,3 +7,4 @@ export const cartRoute = express.Router();
 
 cartRoute.get('/', validateUser, CartController.getUserCart);
 cartRoute.post('/', validateUser, CartController.saveToCart);
+cartRoute.post('/updateCart', validateUser, CartController.updateCart);
