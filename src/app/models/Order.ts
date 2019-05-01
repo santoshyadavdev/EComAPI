@@ -71,6 +71,15 @@ const AddressSchema = new Schema({
     }
 })
 
+const CouriesSchema = new Schema({
+    courierName: {
+        type: String
+    },
+    trackingNumber: {
+        type: String
+    }
+})
+
 let OrderSchema = new Schema({
     userId: {
         type: ObjectId,
@@ -79,6 +88,7 @@ let OrderSchema = new Schema({
     shippingAddress: AddressSchema,
     products: [ProductSchema],
     paymentInfo: PaymentSchema,
+    courierInfo: CouriesSchema,
     total: {
         type: Number,
         required: true,

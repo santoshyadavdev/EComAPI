@@ -57,9 +57,9 @@ export class OrderController {
             },
             (err: Errback, result: any) => {
                 if (result === null) {
-                    res.json({ status: 'error', message: 'User Info Not available', data: null });
+                    res.json({ status: 'error', message: 'Order Not available', data: null });
                 } else {
-                    res.json({ status: 'success', message: 'User Info updated', data: {} });
+                    res.json({ status: 'success', message: 'Order updated', data: null });
                 }
             })
     }
