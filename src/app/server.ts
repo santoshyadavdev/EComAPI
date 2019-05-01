@@ -8,11 +8,13 @@ import {
 import * as bodyParser from "body-parser";
 import * as dotenv from "dotenv";
 import { MongoConnect } from "./db/db";
-import { validateUser } from "./middleware/auth";
-
+import * as helmet from 'helmet';
+import * as compression from 'compression';
 
 dotenv.load();
 var app = express();
+app.use(helmet());
+app.use(compression());
 
 // app.get("/", (req, res) => res.send("This is get express API"));
 
