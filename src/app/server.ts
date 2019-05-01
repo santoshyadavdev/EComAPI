@@ -39,7 +39,7 @@ app.use("/wishlist", wishlistRoute);
 app.use("/cart", cartRoute);
 app.use("/order", orderRoute);
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
   MongoConnect.connect().then(res => console.log("DB connected"));
   console.log("Server running on port 3000");
 });
