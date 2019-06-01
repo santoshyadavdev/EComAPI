@@ -7,7 +7,7 @@ export class CartController {
     static getUserCart(req: Request, res: Response, next: NextFunction) {
         Cart.aggregate([
             {
-                $match: { userId: new Types.ObjectId(req.body.userId) , status: 'A' }
+                $match: { userId: new Types.ObjectId(req.body.userId), status: 'A' }
             },
             {
                 $lookup: {
@@ -33,6 +33,16 @@ export class CartController {
                 res.status(500).json({ status: 'failed', message: err })
             } else {
                 res.json({ status: 'success', message: 'Product added to Cart!', data: {} })
+            }
+        })
+    }
+
+    static updateCart(req: Request, res: Response, next: NextFunction) {
+        Cart.updateMany({ _id: { $in: [req.body.productId], userId: req.body.userId } }, (err: Errback, result: any) => {
+            if (err) {
+                res.status(500).json({ status: 'failed', message: err })
+            } else {
+                res.json({ status: 'success', message: 'Cart Updated!', data: result })
             }
         })
     }

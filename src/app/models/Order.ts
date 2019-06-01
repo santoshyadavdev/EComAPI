@@ -79,7 +79,7 @@ let OrderSchema = new Schema({
     shippingAddress: AddressSchema,
     products: [ProductSchema],
     paymentInfo: PaymentSchema,
-    total : {
+    total: {
         type: Number,
         required: true,
     },
@@ -87,6 +87,10 @@ let OrderSchema = new Schema({
         type: String,
         required: true,
         default: 'Placed'
+    },
+    createdOn: {
+        type: Date,
+        default: new Date()
     }
 });
 
